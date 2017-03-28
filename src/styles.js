@@ -10,9 +10,6 @@ const App = injectSheet({
     'padding': '20px',
     'color': 'white',
   },
-  logo: {
-    'height': '80px',
-  },
   intro: {
     'font-size': 'large',
   },
