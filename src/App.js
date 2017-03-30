@@ -1,23 +1,18 @@
 import React, { PureComponent } from 'react'
-import { App as style } from './styles'
+import { Match } from './components/Match'
 
 /** Main app component. */
 class App extends PureComponent {
   /** Render method. */
   render() {
-    const { classes } = this.props
-
     return (
-      <div className={classes.container}>
-        <div className={classes.header}>
-          <h2>Welcome to React</h2>
-        </div>
-        <p className={classes.intro}>
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <Match
+          participants={['That Guy', 'Other Person']}
+        />
       </div>
     )
   }
 }
 
-export default style(App)
+export default App
