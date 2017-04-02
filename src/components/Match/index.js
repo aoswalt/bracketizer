@@ -1,5 +1,5 @@
 import Match from './Match'
 
 export {
-  Match
+  Match as default,
 }

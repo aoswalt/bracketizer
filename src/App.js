@@ -1,15 +1,47 @@
 import React, { PureComponent } from 'react'
-import { Match } from './components/Match'
+import Round from './components/Round'
+
+const bracket = [
+  [
+    ['Someone', 'Else'],
+    ['That Guy', 'Other Person'],
+    ['That Guy', 'Other Person'],
+    ['That Guy', 'Other Person'],
+    ['Someone', 'Else'],
+    ['That Guy', 'Other Person'],
+    ['That Guy', 'Other Person'],
+    ['That Guy', 'Other Person'],
+  ],
+  [
+    ['Someone', 'Else'],
+    ['That Guy', 'Other Person'],
+    ['That Guy', 'Other Person'],
+    ['That Guy', 'Other Person'],
+  ],
+  [
+    ['Someone', 'Other Person'],
+    ['Someone', 'Other Person'],
+  ],
+  [
+    ['Someone', 'Other Person'],
+  ],
+]
+
+const styles = {
+  bracket: {
+    display: 'flex',
+    alignItems: 'stretch',
+    position: 'relative',
+  },
+}
 
 /** Main app component. */
 class App extends PureComponent {
   /** Render method. */
   render() {
     return (
-      <div>
-        <Match
-          participants={['That Guy', 'Other Person']}
-        />
+      <div style={styles.bracket}>
+        {bracket.map(r => <Round matches={r} />)}
       </div>
     )
   }
