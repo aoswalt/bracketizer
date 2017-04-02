@@ -14,16 +14,16 @@ const bracket = [
   ],
   [
     ['Someone', 'Else'],
+    ['That Guy', ''],
     ['That Guy', 'Other Person'],
-    ['That Guy', 'Other Person'],
-    ['That Guy', 'Other Person'],
+    ['', 'Other Person'],
   ],
   [
-    ['Someone', 'Other Person'],
-    ['Someone', 'Other Person'],
+    ['', 'Other Person'],
+    ['', ''],
   ],
   [
-    ['Someone', 'Other Person'],
+    ['', ''],
   ],
 ]
 

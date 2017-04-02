@@ -2,8 +2,8 @@ import injectSheet from 'react-jss'
 
 const Bracket = injectSheet({
   bracket: {
-    'display': 'flex',
     'align-items': 'stretch',
+    'display': 'flex',
     'position': 'relative',
   },
 })
@@ -21,16 +21,19 @@ const Match = injectSheet({
     'display': 'inline-block',
   },
   matchContainer: {
-    'display': 'flex',
-    'flex-direction': 'column',
     'border': '1px solid black',
     'border-radius': '.3rem',
+    'display': 'flex',
+    'flex-direction': 'column',
   },
 })
 
 const Participant = injectSheet({
   label: {
+    'align-items': 'center',
+    'display': 'flex',
     'font-weight': 'bolder',
+    'height': '1.2rem',
     'margin': '.4rem',
   },
 })
