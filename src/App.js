@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import Round from './components/Round'
+import Bracket from './components/Bracket'
 
 const bracket = [
   [
@@ -27,22 +27,12 @@ const bracket = [
   ],
 ]
 
-const styles = {
-  bracket: {
-    display: 'flex',
-    alignItems: 'stretch',
-    position: 'relative',
-  },
-}
-
 /** Main app component. */
 class App extends PureComponent {
   /** Render method. */
   render() {
     return (
-      <div style={styles.bracket}>
-        {bracket.map(r => <Round matches={r} />)}
-      </div>
+      <Bracket bracket={bracket} />
     )
   }
 }

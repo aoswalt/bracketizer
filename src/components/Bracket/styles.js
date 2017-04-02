@@ -1,5 +1,21 @@
 import injectSheet from 'react-jss'
 
+const Bracket = injectSheet({
+  bracket: {
+    'display': 'flex',
+    'align-items': 'stretch',
+    'position': 'relative',
+  },
+})
+
+const Round = injectSheet({
+  round: {
+    'display': 'flex',
+    'flex-direction': 'column',
+    'justify-content': 'space-around',
+  },
+})
+
 const Match = injectSheet({
   container: {
     'display': 'inline-block',
@@ -26,7 +42,9 @@ const Divider = injectSheet({
 })
 
 export {
+  Bracket,
   Divider,
   Match,
   Participant,
+  Round,
 }
