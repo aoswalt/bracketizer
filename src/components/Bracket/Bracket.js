@@ -7,22 +7,23 @@ import {
 } from './styles'
 import React from 'react'
 
-const Bracket = styleBracket(({ bracket, classes }) =>
+const Bracket = styleBracket(({ bracket, classes, matchSize }) =>
   <div className={classes.bracket}>
-    {bracket.map((r, i) => <Round key={i} matches={r} />)}
+    {bracket.map((r, i) => <Round key={i} matches={r} matchSize={matchSize} />)}
   </div>
 )
 
-const Round = styleRound(({ classes, matches }) =>
+const Round = styleRound(({ classes, matches, matchSize }) =>
   <div className={classes.round}>
-    {matches.map((m, i) => <Match key={i} participants={m} />)}
+    {matches.map((m, i) => <Match key={i} participants={m} matchSize={matchSize} />)}
   </div>)
 
 const Match = styleMatch(({
   classes,
   participants,
+  matchSize,
 }) => (
-  <div className={classes.container}>
+  <div className={classes.container} style={{ width: matchSize }}>
     <div className={classes.matchContainer}>
       <Participant name={participants[0]} />
       <Divider />

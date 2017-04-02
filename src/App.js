@@ -37,13 +37,16 @@ const longestEntryLength = (l, initalMax = 0) => longestEntry(l, stringLength, i
 const getLongestParticipantLength = (roundList) =>
   roundList.reduce((max, round) => longestEntry(round, longestEntryLength, max), 0)
 
+const widthRatio = 0.75
+
 /** Main app component. */
 class App extends PureComponent {
   /** Render method. */
   render() {
-    console.warn(getLongestParticipantLength(bracket))
+    const longest = getLongestParticipantLength(bracket)
+    const matchSize = `${longest * widthRatio}rem`
     return (
-      <Bracket bracket={bracket} />
+      <Bracket bracket={bracket} matchSize={matchSize} />
     )
   }
 }
