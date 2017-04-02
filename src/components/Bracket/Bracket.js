@@ -9,13 +9,13 @@ import React from 'react'
 
 const Bracket = styleBracket(({ bracket, classes }) =>
   <div className={classes.bracket}>
-    {bracket.map(r => <Round matches={r} />)}
+    {bracket.map((r, i) => <Round key={i} matches={r} />)}
   </div>
 )
 
 const Round = styleRound(({ classes, matches }) =>
   <div className={classes.round}>
-    {matches.map(m => <Match participants={m} />)}
+    {matches.map((m, i) => <Match key={i} participants={m} />)}
   </div>)
 
 const Match = styleMatch(({
