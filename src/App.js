@@ -36,6 +36,16 @@ const bracket = [
   [
     ['', ''],
   ],
+  [
+    ['', 'Other Person'],
+    ['', ''],
+  ],
+  [
+    ['Someone', 'Else'],
+    ['That Guy', ''],
+    ['That Guy', 'Other Person'],
+    ['', 'Other Person'],
+  ],
 ]
 
 const buildArray = (length, val) =>
@@ -68,7 +78,10 @@ class App extends PureComponent {
   /** Render method. */
   render() {
     return (
-      <Bracket bracket={buildBracket(participantList)} />
+      <div>
+        <Bracket bracket={buildBracket(participantList)} />
+        <Bracket bracket={bracket} />
+      </div>
     )
   }
 }
