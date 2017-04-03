@@ -7,11 +7,29 @@ import {
 } from './styles'
 import React from 'react'
 
-const Bracket = styleBracket(({ bracket, classes, matchSize }) =>
-  <div className={classes.bracket}>
+
+const widthRatio = 0.75
+
+
+const longestEntry = (list, lengthFunc, initalMax = 0) =>
+  list.reduce((max, l) => Math.max(max, lengthFunc(l)), initalMax)
+
+const stringLength = (s) => s.length
+
+const longestEntryLength = (l, initalMax = 0) => longestEntry(l, stringLength, initalMax)
+
+const getLongestParticipantLength = (roundList) =>
+  roundList.reduce((max, round) => longestEntry(round, longestEntryLength, max), 0)
+
+
+const Bracket = styleBracket(({ bracket, classes }) => {
+  const longest = getLongestParticipantLength(bracket)
+  const matchSize = `${longest * widthRatio}rem`
+
+  return <div className={classes.bracket}>
     {bracket.map((r, i) => <Round key={i} matches={r} matchSize={matchSize} />)}
   </div>
-)
+})
 
 const Round = styleRound(({ classes, matches, matchSize }) =>
   <div className={classes.round}>
