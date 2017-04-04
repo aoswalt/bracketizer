@@ -82,9 +82,9 @@ const mapping = {
 }
 
 const buildMatches = ({ head, tail }, acc = []) =>
-  tail.length ? buildMatches(ArrayX.split(tail, 2), [...acc, head]) : [...acc, head]
+  tail.length ? buildMatches(ArrayX.take(tail, 2), [...acc, head]) : [...acc, head]
 
-const buildRound = list => buildMatches(ArrayX.split(list, 2))
+const buildRound = list => buildMatches(ArrayX.take(list, 2))
 
 const finishRounds = (roundList) => {
   const lastLength = roundList[roundList.length - 1].length
