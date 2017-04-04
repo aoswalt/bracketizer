@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import { ArrayX } from './util'
 import Bracket from './components/Bracket'
 
 const participantList = [
@@ -48,28 +49,20 @@ const bracket = [
   ],
 ]
 
-const buildArray = (length, val) =>
-  Array.from({ length }).map((v, i) => (val !== undefined) ? val : i)
-
-const split = (list, count) => ({
-  head: list.slice(0, count),
-  tail: list.slice(count)
-})
-
 const buildMatches = ({ head, tail }, acc = []) =>
-  tail.length ? buildMatches(split(tail, 2), [...acc, head]) : [...acc, head]
+  tail.length ? buildMatches(ArrayX.split(tail, 2), [...acc, head]) : [...acc, head]
 
-const buildRound = (list) => buildMatches(split(list, 2))
+const buildRound = list => buildMatches(ArrayX.split(list, 2))
 
 const finishRounds = (roundList) => {
   const lastLength = roundList[roundList.length - 1].length
   return lastLength > 1
-    ? finishRounds([...roundList, buildRound(buildArray(lastLength, ''))])
+    ? finishRounds([...roundList, buildRound(ArrayX.build(lastLength, ''))])
     : roundList
 }
 
-const buildBracket = (list) => {
-  const initialMatches = buildRound(list)
+const buildBracket = (participantList) => {
+  const initialMatches = buildRound(participantList)
   return finishRounds([initialMatches])
 }
 
