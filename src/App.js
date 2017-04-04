@@ -49,6 +49,38 @@ const bracket = [
   ],
 ]
 
+//NOTE(adam): bracket-round-match, win/loss, bracket round match position
+const mapping = {
+  '0-0-0': {
+    w: { b: 0, r: 1, m: 0, p: 0 },
+    l: null,
+  },
+  '0-0-1': {
+    w: { b: 0, r: 1, m: 0, p: 1 },
+    l: null,
+  },
+  '0-0-2': {
+    w: { b: 0, r: 1, m: 1, p: 0 },
+    l: null,
+  },
+  '0-0-3': {
+    w: { b: 0, r: 1, m: 1, p: 1 },
+    l: null,
+  },
+  '0-1-0': {
+    w: { b: 0, r: 2, m: 0, p: 0 },
+    l: null,
+  },
+  '0-1-1': {
+    w: { b: 0, r: 2, m: 0, p: 1 },
+    l: null,
+  },
+  '0-2-0': {
+    w: null,
+    l: null,
+  },
+}
+
 const buildMatches = ({ head, tail }, acc = []) =>
   tail.length ? buildMatches(ArrayX.split(tail, 2), [...acc, head]) : [...acc, head]
 
