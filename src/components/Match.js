@@ -16,15 +16,26 @@ const style = injectSheet({
 })
 
 const Match = ({
+  bracketId,
   classes,
-  participants,
+  id,
   matchSize,
+  onParticipantClick,
+  participants,
+  roundId,
 }) => (
   <div className={classes.container} style={{ width: matchSize }}>
     <div className={classes.matchContainer}>
-      <Participant name={participants[0]} />
-      <Divider />
-      <Participant name={participants[1]} />
+      {participants.reduce((res, p, i, pList) =>
+        [...res,
+          <Participant
+            id={i}
+            key={`p-${i}`}
+            name={p}
+          />,
+        ].concat(i < pList.length - 1 ? <Divider key={`d-${i}`} /> : null),
+        []
+      )}
     </div>
   </div>
 )
