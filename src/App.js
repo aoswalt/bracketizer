@@ -138,23 +138,21 @@ const parsedMapping = encodedMapping.reduce((acc, m) => {
     [data[0]]: {
       win: parseMatchId(data[1]),
       lose: parseMatchId(data[2]),
-    }
+    },
   }
 }, {})
+
+const logLocation = (location) => () => (console.log(location))
 
 
 /** Main app component. */
 class App extends PureComponent {
   /** Render method. */
   render() {
-    console.log(encodedMapping)
-    console.log(parsedMapping)
-    console.warn(encodeMatchId(parseMatchId(encodeMatchId(parseMatchId(encodeMatchId(parseMatchId('_')))))))
-
     return (
       <div>
-        <Bracket bracket={buildBracket(participantList)} />
-        <Bracket bracket={bracket} />
+        <Bracket bracket={buildBracket(participantList)} id={0} onPositionClick={logLocation} />
+        <Bracket bracket={bracket} id={0} onPositionClick={logLocation} />
       </div>
     )
   }

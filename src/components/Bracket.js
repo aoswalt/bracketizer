@@ -27,6 +27,8 @@ const style = injectSheet({
 const Bracket = ({
   bracket,
   classes,
+  id,
+  onPositionClick,
 }) => {
   const longest = getLongestParticipantLength(bracket)
   const matchSize = `${longest * widthRatio}rem`
@@ -35,8 +37,11 @@ const Bracket = ({
     {bracket.map((r, i) =>
       <Round
         key={i}
+        id={i}
+        bracketId={id}
         matches={r}
         matchSize={matchSize}
+        onPositionClick={onPositionClick}
       />
     )}
   </div>

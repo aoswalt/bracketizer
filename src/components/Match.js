@@ -20,7 +20,7 @@ const Match = ({
   classes,
   id,
   matchSize,
-  onParticipantClick,
+  onPositionClick,
   participants,
   roundId,
 }) => (
@@ -29,9 +29,13 @@ const Match = ({
       {participants.reduce((res, p, i, pList) =>
         [...res,
           <Participant
+            bracketId={bracketId}
             id={i}
             key={`p-${i}`}
+            matchId={id}
             name={p}
+            onClick={onPositionClick}
+            roundId={roundId}
           />,
         ].concat(i < pList.length - 1 ? <Divider key={`d-${i}`} /> : null),
         []

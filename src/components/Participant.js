@@ -1,5 +1,6 @@
 import React from 'react'
 import injectSheet from 'react-jss'
+import { Location } from '../util/location'
 
 const style = injectSheet({
   label: {
@@ -12,9 +13,20 @@ const style = injectSheet({
 })
 
 const Participant = ({
+  bracketId,
   classes,
+  id,
+  matchId,
   name,
+  onClick,
+  roundId,
 }) =>
-  <div className={classes.label}>{name}</div>
+  <div
+    className={classes.label}
+    onClick={onClick(new Location(bracketId, roundId, matchId, id))}
+  >
+    {name}
+  </div>
+
 
 export default style(Participant)

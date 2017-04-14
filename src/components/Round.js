@@ -11,16 +11,23 @@ const style = injectSheet({
 })
 
 const Round = ({
+  bracketId,
   classes,
-  matches,
+  id,
   matchSize,
+  matches,
+  onPositionClick,
 }) =>
   <div className={classes.round}>
     {matches.map((m, i) =>
       <Match
         key={i}
+        bracketId={bracketId}
+        id={i}
         participants={m}
         matchSize={matchSize}
+        onPositionClick={onPositionClick}
+        roundId={id}
       />
     )}
   </div>
