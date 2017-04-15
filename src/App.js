@@ -104,7 +104,7 @@ const finishRounds = (roundList) => {
 
 const buildBracket = (participantList) => {
   const initialMatches = buildRound(participantList)
-  return finishRounds([initialMatches])
+  return [finishRounds([initialMatches])]
 }
 
 
@@ -117,6 +117,8 @@ const encodedMapping = [
   '0-1-1 0-2-0-1 _',
   '0-2-1 _ _',
 ]
+
+const builtBracket = buildBracket(participantList)
 
 const parsedMapping = encodedMapping.reduce((acc, m) => {
   const data = m.split(' ')
@@ -131,6 +133,14 @@ const parsedMapping = encodedMapping.reduce((acc, m) => {
 
 const logLocation = (location) => () => (console.log(location))
 
+const play = (winLocation) => () => {
+  console.warn('buildBracket', builtBracket)
+  const { win: winTarget, lose: loseTarget } = parsedMapping[encodeLocation(winLocation).slice(0, -2)]
+  console.warn('winLocation', winLocation)
+  console.warn('winTarget', winTarget)
+  builtBracket[winTarget.bracket][winTarget.round][winTarget.match][winTarget.position] = builtBracket[winLocation.bracket][winLocation.round][winLocation.match][winLocation.position]
+  console.warn(loseTarget)
+}
 
 /** Main app component. */
 class App extends PureComponent {
@@ -138,8 +148,8 @@ class App extends PureComponent {
   render() {
     return (
       <div>
-        <Bracket bracket={buildBracket(participantList)} id={0} onPositionClick={logLocation} />
-        <Bracket bracket={bracket} id={0} onPositionClick={logLocation} />
+        <Bracket bracket={builtBracket[0]} id={0} onPositionClick={play} />
+        <Bracket bracket={bracket} id={0} onPositionClick={play} />
       </div>
     )
   }
