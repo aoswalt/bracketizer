@@ -1,5 +1,5 @@
 const build = (length, val) =>
-  Array.from({ length }).map((v, i) => (val === undefined) ? i : val)
+  Array.from({ length }, (v, i) => (val === undefined) ? i : val)
 
 const take = (list, count) => ({
   head: list.slice(0, count),
