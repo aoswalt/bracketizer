@@ -1,7 +1,10 @@
+import {
+  ArrayX,
+  encodeLocation,
+  parseLocation,
+} from './util'
 import React, { PureComponent } from 'react'
-import { ArrayX } from './util'
 import Bracket from './components/Bracket'
-import makeStruct from './util/structor'
 
 const participantList = [
   'lorem',
@@ -105,22 +108,6 @@ const buildBracket = (participantList) => {
 }
 
 
-const Match = makeStruct('bracket round match position')
-const parseMatchId = (matchId) => {
-  const idParts = matchId.split('-')
-  const matchArgs = idParts.map(i => { const val = parseInt(i, 10); return isNaN(val) ? undefined : val })
-  return new Match(...matchArgs)
-}
-
-const encodeMatchId = (m) => {
-  const parts = []
-  !isNaN(m.bracket) && parts.push(m.bracket)
-  !isNaN(m.round) && parts.push(m.round)
-  !isNaN(m.match) && parts.push(m.match)
-  !isNaN(m.position) && parts.push(m.position)
-  return parts.join('-')
-}
-
 const encodedMapping = [
   '0-0-0 0-1-0-0 _',
   '0-0-1 0-1-0-1 _',
@@ -136,8 +123,8 @@ const parsedMapping = encodedMapping.reduce((acc, m) => {
   return {
     ...acc,
     [data[0]]: {
-      win: parseMatchId(data[1]),
-      lose: parseMatchId(data[2]),
+      win: parseLocation(data[1]),
+      lose: parseLocation(data[2]),
     },
   }
 }, {})
