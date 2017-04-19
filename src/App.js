@@ -148,7 +148,9 @@ class App extends PureComponent {
   render() {
     return (
       <div>
-        <Bracket bracket={builtBracket[0]} id={0} onPositionClick={play} />
+        {builtBracket.map((b, i) =>
+          <Bracket key={i} bracket={b} id={i} onPositionClick={play} />
+        )}
         <Bracket bracket={bracket} id={0} onPositionClick={play} />
       </div>
     )
