@@ -4,16 +4,19 @@ const Location = makeStruct('bracket round match position')
 
 const parseLocation = (matchId) => {
   const idParts = matchId.split('-')
-  const matchArgs = idParts.map(i => { const val = parseInt(i, 10); return isNaN(val) ? undefined : val })
+  const matchArgs = idParts.map(i => {
+    const val = parseInt(i, 10)
+    return isNaN(val) ? undefined : val
+  })
   return new Location(...matchArgs)
 }
 
-const encodeLocation = (m) => {
+const encodeLocation = (m, noPosition) => {
   const parts = []
   !isNaN(m.bracket) && parts.push(m.bracket)
   !isNaN(m.round) && parts.push(m.round)
   !isNaN(m.match) && parts.push(m.match)
-  !isNaN(m.position) && parts.push(m.position)
+  !noPosition && !isNaN(m.position) && parts.push(m.position)
   return parts.join('-')
 }
 
