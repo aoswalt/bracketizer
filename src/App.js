@@ -141,12 +141,16 @@ const setPlayer = (bracket, location, player) =>
   bracket[location.bracket][location.round][location.match][location.position] = player
 
 const play = (winLocation) => () => {
-  console.warn('buildBracket', builtBracket)
-  const { win: winTarget, lose: loseTarget } = parsedMapping[encodeLocation(winLocation).slice(0, -2)]
-  console.warn('winLocation', winLocation)
-  console.warn('winTarget', winTarget)
-  builtBracket[winTarget.bracket][winTarget.round][winTarget.match][winTarget.position] = builtBracket[winLocation.bracket][winLocation.round][winLocation.match][winLocation.position]
-  console.warn(loseTarget)
+  const {
+    win: winTarget,
+    lose: loseTarget,
+  } = parsedMapping[encodeLocation(winLocation, true)]
+
+  const winner = getPlayer(builtBracket, winLocation)
+  setPlayer(builtBracket, winTarget, winner)
+  const loser = getPlayer(builtBracket, winLocation, true)
+  loseTarget.isComplete && setPlayer(builtBracket, loseTarget, loser)
+  console.warn(builtBracket)
 }
 
 /** Main app component. */
