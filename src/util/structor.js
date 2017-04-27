@@ -18,6 +18,7 @@ const makeStruct = (fieldListString) => {
     for(let i = 0; i < count; i++) {
       this[fields[i]] = args[i]
     }
+    this.isComplete = !args.includes(undefined)
     Object.freeze(this)
   }
   return constructor
