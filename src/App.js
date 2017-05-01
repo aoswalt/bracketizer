@@ -134,8 +134,8 @@ const parsedMapping = encodedMapping.reduce((acc, m) => {
 const logLocation = (location) => () => (console.log(location))
 
 const getPlayer = (bracket, location, opposite) => opposite
-  ? bracket[location.bracket][location.round][location.match][location.position]
-  : bracket[location.bracket][location.round][location.match][(location.position - 1) * 1]
+  ? bracket[location.bracket][location.round][location.match][(location.position - 1) * 1]
+  : bracket[location.bracket][location.round][location.match][location.position]
 
 const setPlayer = (bracket, location, player) =>
   bracket[location.bracket][location.round][location.match][location.position] = player
