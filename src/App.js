@@ -85,6 +85,16 @@ const mapping = {
   },
 }
 
+const encodedMapping = [
+  '0-0-0 0-1-0-0 _',
+  '0-0-1 0-1-0-1 _',
+  '0-0-2 0-1-1-0 _',
+  '0-0-3 0-1-1-1 _',
+  '0-1-0 0-2-0-0 _',
+  '0-1-1 0-2-0-1 _',
+  '0-2-1 _ _',
+]
+
 
 const buildMatches = ({ head, tail }, acc = []) => {
   const currentMatchList = [...acc, head]
@@ -108,18 +118,6 @@ const buildBracket = (participantList) => {
 }
 
 
-const encodedMapping = [
-  '0-0-0 0-1-0-0 _',
-  '0-0-1 0-1-0-1 _',
-  '0-0-2 0-1-1-0 _',
-  '0-0-3 0-1-1-1 _',
-  '0-1-0 0-2-0-0 _',
-  '0-1-1 0-2-0-1 _',
-  '0-2-1 _ _',
-]
-
-const builtBracket = buildBracket(participantList)
-
 const parsedMapping = encodedMapping.reduce((acc, m) => {
   const data = m.split(' ')
   return {
@@ -131,8 +129,6 @@ const parsedMapping = encodedMapping.reduce((acc, m) => {
   }
 }, {})
 
-const logLocation = (location) => () => (console.log(location))
-
 const getPlayer = (bracket, location, opposite) => opposite
   ? bracket[location.bracket][location.round][location.match][(location.position - 1) * -1]
   : bracket[location.bracket][location.round][location.match][location.position]
@@ -141,7 +137,6 @@ const setPlayer = (bracket, location, player) =>
   bracket[location.bracket][location.round][location.match][location.position] = player
 
 
-/** Main app component. */
 class App extends PureComponent {
   constructor(props) {
     super(props)

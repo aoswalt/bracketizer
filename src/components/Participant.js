@@ -1,6 +1,6 @@
+import { Location } from '../util/location'
 import React from 'react'
 import injectSheet from 'react-jss'
-import { Location } from '../util/location'
 
 const style = injectSheet({
   label: {
