@@ -1,5 +1,6 @@
 import {
   ArrayX,
+  buildTournament,
   encodeLocation,
   parseLocation,
 } from './util'
@@ -96,28 +97,6 @@ const encodedMapping = [
 ]
 
 
-const buildMatches = ({ head, tail }, acc = []) => {
-  const currentMatchList = [...acc, head]
-  return tail.length
-    ? buildMatches(ArrayX.take(tail, 2), currentMatchList)
-    : currentMatchList
-}
-
-const buildRound = list => buildMatches(ArrayX.take(list, 2))
-
-const finishRounds = (roundList) => {
-  const lastLength = roundList[roundList.length - 1].length
-  return lastLength > 1
-    ? finishRounds([...roundList, buildRound(ArrayX.build(lastLength, ''))])
-    : roundList
-}
-
-const buildBracket = (participantList) => {
-  const initialMatches = buildRound(participantList)
-  return [finishRounds([initialMatches])]
-}
-
-
 const parsedMapping = encodedMapping.reduce((acc, m) => {
   const data = m.split(' ')
   return {
@@ -141,12 +120,12 @@ class App extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      bracketList: buildBracket(participantList),
+      tournament: buildTournament(participantList),
     }
   }
 
   play = (winLocation) => () => {
-    const temp = JSON.parse(JSON.stringify(this.state.bracketList))
+    const temp = JSON.parse(JSON.stringify(this.state.tournament))
 
     const mapping = parsedMapping[encodeLocation(winLocation, true)]
     if(!mapping) return
@@ -166,13 +145,13 @@ class App extends PureComponent {
       loseTarget.isComplete && setPlayer(temp, loseTarget, loser)
     }
 
-    this.setState({ bracketList: temp })
+    this.setState({ tournament: temp })
   }
 
   render() {
     return (
       <div>
-        {this.state.bracketList.map((b, i) =>
+        {this.state.tournament.map((b, i) =>
           <Bracket key={i} bracket={b} id={i} onPositionClick={this.play} />
         )}
         <Bracket bracket={bracket} id={0} onPositionClick={p => () => console.warn(p)} />
