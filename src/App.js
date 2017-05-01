@@ -147,15 +147,24 @@ class App extends PureComponent {
 
   play = (winLocation) => () => {
     const temp = JSON.parse(JSON.stringify(this.state.bracketList))
+
+    const mapping = parsedMapping[encodeLocation(winLocation, true)]
+    if(!mapping) return
+
     const {
       win: winTarget,
       lose: loseTarget,
-    } = parsedMapping[encodeLocation(winLocation, true)]
+    } = mapping
 
-    const winner = getPlayer(temp, winLocation)
-    setPlayer(temp, winTarget, winner)
-    const loser = getPlayer(temp, winLocation, true)
-    loseTarget.isComplete && setPlayer(temp, loseTarget, loser)
+    if(winTarget) {
+      const winner = getPlayer(temp, winLocation)
+      setPlayer(temp, winTarget, winner)
+    }
+
+    if(loseTarget) {
+      const loser = getPlayer(temp, winLocation, true)
+      loseTarget.isComplete && setPlayer(temp, loseTarget, loser)
+    }
 
     this.setState({ bracketList: temp })
   }
