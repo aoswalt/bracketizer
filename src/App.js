@@ -140,29 +140,38 @@ const getPlayer = (bracket, location, opposite) => opposite
 const setPlayer = (bracket, location, player) =>
   bracket[location.bracket][location.round][location.match][location.position] = player
 
-const play = (winLocation) => () => {
-  const {
-    win: winTarget,
-    lose: loseTarget,
-  } = parsedMapping[encodeLocation(winLocation, true)]
-
-  const winner = getPlayer(builtBracket, winLocation)
-  setPlayer(builtBracket, winTarget, winner)
-  const loser = getPlayer(builtBracket, winLocation, true)
-  loseTarget.isComplete && setPlayer(builtBracket, loseTarget, loser)
-  console.warn(builtBracket)
-}
 
 /** Main app component. */
 class App extends PureComponent {
-  /** Render method. */
+  constructor(props) {
+    super(props)
+    this.state = {
+      bracketList: buildBracket(participantList),
+    }
+  }
+
+  play = (winLocation) => () => {
+    const temp = JSON.parse(JSON.stringify(this.state.bracketList))
+    const {
+      win: winTarget,
+      lose: loseTarget,
+    } = parsedMapping[encodeLocation(winLocation, true)]
+
+    const winner = getPlayer(temp, winLocation)
+    setPlayer(temp, winTarget, winner)
+    const loser = getPlayer(temp, winLocation, true)
+    loseTarget.isComplete && setPlayer(temp, loseTarget, loser)
+
+    this.setState({ bracketList: temp })
+  }
+
   render() {
     return (
       <div>
-        {builtBracket.map((b, i) =>
-          <Bracket key={i} bracket={b} id={i} onPositionClick={play} />
+        {this.state.bracketList.map((b, i) =>
+          <Bracket key={i} bracket={b} id={i} onPositionClick={this.play} />
         )}
-        <Bracket bracket={bracket} id={0} onPositionClick={play} />
+        <Bracket bracket={bracket} id={0} onPositionClick={p => () => console.warn(p)} />
       </div>
     )
   }
