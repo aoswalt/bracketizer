@@ -2,14 +2,8 @@ import {
   ArrayX,
 } from '.'
 
-const buildMatches = ({ head, tail }, acc = []) => {
-  const currentMatchList = [...acc, head]
-  return tail.length
-    ? buildMatches(ArrayX.take(tail, 2), currentMatchList)
-    : currentMatchList
-}
-
-const buildRound = list => buildMatches(ArrayX.take(list, 2))
+//NOTE(adam): currently throwing away remainder
+const buildRound = list => ArrayX.divide(list, 2).segments
 
 const finishRounds = (roundList) => {
   const lastLength = roundList[roundList.length - 1].length

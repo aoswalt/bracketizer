@@ -1,5 +1,4 @@
 import {
-  ArrayX,
   buildTournament,
   encodeLocation,
   parseLocation,

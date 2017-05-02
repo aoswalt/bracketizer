@@ -6,11 +6,15 @@ const take = (list, count) => ({
   tail: list.slice(count),
 })
 
-/** Group Array functions */
-const ArrayX = { build, take }
+const step = ({ list = [], segmentSize }, { head, tail }) =>
+  tail && tail.length < segmentSize
+  ? ({ segments: [...list, head], remain: tail })
+  : step({ list: [...list, head], segmentSize }, take(tail, segmentSize))
+
+const divide = (list, segmentSize) => step({ segmentSize }, take(list, segmentSize))
 
 export {
-  ArrayX as default,
-  build as buildArray,
-  take as takeArray,
+  build,
+  divide,
+  take,
 }

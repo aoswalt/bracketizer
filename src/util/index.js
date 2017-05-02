@@ -1,9 +1,9 @@
+import * as ArrayX from './ArrayX'
 import {
     Location,
     encodeLocation,
     parseLocation,
 } from './location'
-import ArrayX from './ArrayX'
 import { buildTournament } from './tournament'
 
 export {
